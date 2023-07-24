@@ -16,7 +16,9 @@
     "@types/node": "^18.16.19",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.6.3",
-    "postcss": "^8.4.26"
+    "postcss": "^8.4.26",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.4.1"
   },
   "dependencies": {
     "@nuxtjs/supabase": "^0.3.8",
