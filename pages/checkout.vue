@@ -20,31 +20,31 @@
                   <li class="flex items-center gap-2">
                     <div>Contact name:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.name || "Test" }}
+                      {{ currentAddress?.data?.name || 'Test' }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Address:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.address || "Test" }}
+                      {{ currentAddress?.data?.address || 'Test' }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Zip Code:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.zipcode || "Test" }}
+                      {{ currentAddress?.data?.zipcode || 'Test' }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>City:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.city || "Test" }}
+                      {{ currentAddress?.data?.city || 'Test' }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Country:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.country || "Test" }}
+                      {{ currentAddress?.data?.country || 'Test' }}
                     </div>
                   </li>
                 </ul>
@@ -84,15 +84,8 @@
             </div>
 
             <form @submit.prevent="pay()">
-              <div
-                class="border border-gray-500 p-2 rounded-sm"
-                id="card-elemnt"
-              />
-              <p
-                id="card-error"
-                role="alert"
-                class="text-red-600 text-center font-semibold"
-              />
+              <div class="border border-gray-500 p-2 rounded-sm" id="card-elemnt" />
+              <p id="card-error" role="alert" class="text-red-600 text-center font-semibold" />
               <button
                 :disabled="isProcessing"
                 type="submit"
@@ -115,44 +108,44 @@
 </template>
 
 <script setup lang="ts">
-import MainLayout from "@/layouts/MainLayout.vue";
-import { useUserStore } from "@/stores/user";
-import { products } from "@/__mocks__/products";
+import MainLayout from '@/layouts/MainLayout.vue'
+import { useUserStore } from '@/stores/user'
+import { products } from '@/__mocks__/products'
 
-const userStore = useUserStore();
-const router = useRouter();
+const userStore = useUserStore()
+const router = useRouter()
 
-let stripe = null;
-let elements = null;
-let card = null;
-let total = ref(0);
-let clientSecret = null;
-let currentAddress = ref(null);
-let isProcessing = ref(false);
-const mockProducts = ref(products).value.slice(0, 2);
+let stripe = null
+let elements = null
+let card = null
+let total = ref(0)
+let clientSecret = null
+let currentAddress = ref(null)
+let isProcessing = ref(false)
+const mockProducts = ref(products).value.slice(0, 2)
 
-const stripeInit = async () => {};
+const stripeInit = async () => {}
 
-const pay = async () => {};
+const pay = async () => {}
 
-const createOrder = async (stipeId) => {};
+const createOrder = async (stipeId) => {}
 
-const showError = (errorMsgTxt) => {};
+const showError = (errorMsgTxt) => {}
 
 watch(
   () => total.value,
   () => {
     if (total.value > 0) {
-      stripeInit();
+      stripeInit()
     }
-  },
-);
+  }
+)
 
 onMounted(() => {
-  isProcessing.value = true;
+  isProcessing.value = true
 
   userStore.checkout.forEach((item) => {
-    total.value += item.price;
-  });
-});
+    total.value += item.price
+  })
+})
 </script>

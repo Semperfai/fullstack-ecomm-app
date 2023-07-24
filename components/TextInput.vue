@@ -8,10 +8,7 @@
         @focus="isFocused = true"
         @blur="isFocused = false"
         class="w-full bg-white text-gray-800 border text-sm border-[#EFF0EB] rounded-lg p-3 placeholder-gray-500 focus:outline-none"
-        :class="[
-          isFocused ? 'border-gray-900' : '',
-          error ? 'border-red-500' : '',
-        ]"
+        :class="[isFocused ? 'border-gray-900' : '', error ? 'border-red-500' : '']"
         v-model="inputComputed"
         autocomplete="off"
       />
@@ -23,22 +20,16 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["update:input"]);
+const emit = defineEmits(['update:input'])
 
-const props = defineProps([
-  "input",
-  "placeholder",
-  "inputType",
-  "error",
-  "max",
-]);
+const props = defineProps(['input', 'placeholder', 'inputType', 'error', 'max'])
 
-const { input, placeholder, inputType, error, max } = toRefs(props);
+const { input, placeholder, inputType, error, max } = toRefs(props)
 
-let isFocused = ref(false);
+let isFocused = ref(false)
 
 const inputComputed = computed({
   get: () => input.value,
-  set: (value) => emit("update:input", value),
-});
+  set: (value) => emit('update:input', value)
+})
 </script>

@@ -13,6 +13,6 @@
 </template>
 
 <script setup>
-import MainLayout from "@/layouts/MainLayout.vue";
-import { products } from "@/__mocks__/products";
+import MainLayout from '@/layouts/MainLayout.vue'
+import { products } from '@/__mocks__/products'
 </script>

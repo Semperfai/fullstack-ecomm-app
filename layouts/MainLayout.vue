@@ -1,7 +1,9 @@
 <template>
   <div id="MainLayout" class="w-full fixed z-50">
     <div id="TopMenu" class="w-full bg-white border-b md:block hidden">
-      <ul class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-white max-w-[1200px]">
+      <ul
+        class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-white max-w-[1200px]"
+      >
         <li
           class="border-r text-xl font-normal border-r-gray-400 px-3 hover:text-[#FF4646] cursor-pointer"
           v-for="{ title, id, icon_name } in topMenuItems"
@@ -37,7 +39,9 @@
       </ul>
     </div>
     <div id="MainHeader" class="flex items-center w-full bg-white">
-      <div class="flex lg:justify-start justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto">
+      <div
+        class="flex lg:justify-start justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto"
+      >
         <NuxtLink to="/" class="min-w-[170px]">
           <img width="160" src="/logo.png" class="w-24 sm:w-28 md:w-28 lg:w-40" alt="Shop App" />
         </NuxtLink>
@@ -73,14 +77,22 @@
           </div>
         </div>
         <NuxtLink to="/shoppingcart" class="flex items-center">
-          <button class="relative md:block hidden" @mouseenter="isCartHover = true" @mouseleave="isCartHover = false">
+          <button
+            class="relative md:block hidden"
+            @mouseenter="isCartHover = true"
+            @mouseleave="isCartHover = false"
+          >
             <span
               class="absolute flex items-center justify-center -right-[3px] top-0 bg-[#FF4646] h-[17px] text-xs text-white px-0.5 rounded-full"
             >
               0
             </span>
             <div class="min-w-[40px]">
-              <Icon name="ph:shopping-cart-simple-light" size="33" :color="isCartHover ? '#FF4646' : ''" />
+              <Icon
+                name="ph:shopping-cart-simple-light"
+                size="33"
+                :color="isCartHover ? '#FF4646' : ''"
+              />
             </div>
           </button>
         </NuxtLink>
@@ -103,41 +115,41 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user';
-import { ITopMenuItems } from './types';
+import { useUserStore } from '@/stores/user'
+import { ITopMenuItems } from './types'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
-const isAccountMenu = ref<boolean>(false);
-const isSearching = ref<boolean>(false);
-const searchItem = ref<string>('');
-const isCartHover = ref<boolean>(false);
+const isAccountMenu = ref<boolean>(false)
+const isSearching = ref<boolean>(false)
+const searchItem = ref<string>('')
+const isCartHover = ref<boolean>(false)
 const topMenuItems = ref<ITopMenuItems[]>([
   {
     id: 1,
     title: 'Sell on Shop App',
-    link: '/sell',
+    link: '/sell'
   },
   {
     id: 2,
     title: 'Cookie Preferences',
-    link: '/cookie',
+    link: '/cookie'
   },
   {
     id: 3,
     title: 'Help',
-    link: '/help',
+    link: '/help'
   },
   {
     id: 4,
     title: 'Buyer Protection',
-    link: '/buyer',
+    link: '/buyer'
   },
   {
     id: 5,
     title: 'App',
     link: '/app',
-    icon_name: 'ic:sharp-install-mobile',
-  },
-]);
+    icon_name: 'ic:sharp-install-mobile'
+  }
+])
 </script>

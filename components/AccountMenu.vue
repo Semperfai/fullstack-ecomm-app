@@ -17,12 +17,7 @@
     </div>
     <div class="border-b" />
     <ul class="bg-white text-xl">
-      <li
-        @click="navigateTo('/orders')"
-        class="py-2 px-4 w-full hover:bg-gray-200"
-      >
-        My Orders
-      </li>
+      <li @click="navigateTo('/orders')" class="py-2 px-4 w-full hover:bg-gray-200">My Orders</li>
       <li v-if="true" class="py-2 px-4 w-full hover:bg-gray-200">Sign out</li>
     </ul>
   </div>
@@ -31,9 +26,9 @@
 <script setup lang="ts">
 const props = defineProps({
   isAccountMenu: {
-    type: Boolean,
-  },
-});
+    type: Boolean
+  }
+})
 
-const { isAccountMenu } = toRefs(props);
+const { isAccountMenu } = toRefs(props)
 </script>

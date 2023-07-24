@@ -58,59 +58,59 @@
 </template>
 
 <script setup>
-import MainLayout from "@/layouts/MainLayout.vue";
-import { useUserStore } from "@/stores/user";
+import MainLayout from '@/layouts/MainLayout.vue'
+import { useUserStore } from '@/stores/user'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
-let contactName = ref(null);
-let address = ref(null);
-let zipCode = ref(null);
-let city = ref(null);
-let country = ref(null);
-let currentAddress = ref(null);
-let isUpdate = ref(false);
-let isWorking = ref(false);
-let error = ref(null);
+let contactName = ref(null)
+let address = ref(null)
+let zipCode = ref(null)
+let city = ref(null)
+let country = ref(null)
+let currentAddress = ref(null)
+let isUpdate = ref(false)
+let isWorking = ref(false)
+let error = ref(null)
 
 watchEffect(() => {
-  userStore.isLoading = false;
-});
+  userStore.isLoading = false
+})
 
 const submit = async () => {
-  isWorking.value = true;
-  error.value = null;
+  isWorking.value = true
+  error.value = null
 
   if (!contactName.value) {
     error.value = {
-      type: "contactName",
-      message: "A contact name is required",
-    };
+      type: 'contactName',
+      message: 'A contact name is required'
+    }
   } else if (!address.value) {
     error.value = {
-      type: "address",
-      message: "An address is required",
-    };
+      type: 'address',
+      message: 'An address is required'
+    }
   } else if (!zipCode.value) {
     error.value = {
-      type: "zipCode",
-      message: "A zip code is required",
-    };
+      type: 'zipCode',
+      message: 'A zip code is required'
+    }
   } else if (!city.value) {
     error.value = {
-      type: "city",
-      message: "A city is required",
-    };
+      type: 'city',
+      message: 'A city is required'
+    }
   } else if (!country.value) {
     error.value = {
-      type: "country",
-      message: "A country is required",
-    };
+      type: 'country',
+      message: 'A country is required'
+    }
   }
 
   if (error.value) {
-    isWorking.value = false;
-    return;
+    isWorking.value = false
+    return
   }
-};
+}
 </script>
