@@ -21,9 +21,9 @@
 <script setup>
 const props = defineProps({
   product: {
-    type: Object
-  }
-})
+    type: Object,
+  },
+});
 
-const { product } = toRefs(props)
+const { product } = toRefs(props);
 </script>

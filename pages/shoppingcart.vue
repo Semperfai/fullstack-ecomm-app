@@ -3,7 +3,8 @@
     <div id="ShoppingCartPage" class="mt-4 max-w-[1200px] mx-auto px-2">
       <div
         v-if="!mockProducts.length"
-        class="h-[500px] flex items-center justify-center">
+        class="h-[500px] flex items-center justify-center"
+      >
         <div class="pt-20">
           <img class="mx-auto" width="250" src="/cart-emp.png" />
 
@@ -12,7 +13,8 @@
           <div v-if="false" class="flex text-center">
             <NuxtLink
               to="/auth"
-              class="bg-[#FD374F] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4">
+              class="bg-[#FD374F] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+            >
               Sign in
             </NuxtLink>
           </div>
@@ -38,7 +40,8 @@
               <CartItem
                 :product="product"
                 :selectedArray="selectedArray"
-                @selectedRadio="selectedRadioFunc" />
+                @selectedRadio="selectedRadioFunc"
+              />
             </div>
           </div>
         </div>
@@ -55,7 +58,8 @@
             </div>
             <button
               @click="goToCheckout"
-              class="flex items-center justify-center bg-[#FD374F] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4">
+              class="flex items-center justify-center bg-[#FD374F] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+            >
               Checkout
             </button>
           </div>
@@ -83,59 +87,59 @@
 </template>
 
 <script setup>
-import MainLayout from '~/layouts/MainLayout.vue'
-import { products } from '@/__mocks__/products'
-import { cards } from '@/__mocks__/cards'
-import { useUserStore } from '@/stores/user'
+import MainLayout from "~/layouts/MainLayout.vue";
+import { products } from "@/__mocks__/products";
+import { cards } from "@/__mocks__/cards";
+import { useUserStore } from "@/stores/user";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 
-const mockProducts = ref(products)
-const mockCards = ref(cards)
-const selectedArray = ref([])
+const mockProducts = ref(products);
+const mockCards = ref(cards);
+const selectedArray = ref([]);
 
 const totalPrice = computed(() => {
-  let result = userStore.cart.reduce((acc, curr) => acc + curr.price, 0)
-  return (result / 100).toFixed(2)
-})
+  let result = userStore.cart.reduce((acc, curr) => acc + curr.price, 0);
+  return (result / 100).toFixed(2);
+});
 
 const selectedRadioFunc = (e) => {
   if (!selectedArray.value.length) {
-    selectedArray.value.push(e)
-    return
+    selectedArray.value.push(e);
+    return;
   }
 
   selectedArray.value.forEach((item, index) => {
     if (e.id != item.id) {
-      selectedArray.value.push(e)
+      selectedArray.value.push(e);
     } else {
-      selectedArray.value.splice(index, 1)
+      selectedArray.value.splice(index, 1);
     }
-  })
-}
+  });
+};
 
 const goToCheckout = () => {
-  let ids = []
-  userStore.checkout = []
+  let ids = [];
+  userStore.checkout = [];
 
   selectedArray.value.forEach((item) => {
-    ids.push(item.id)
-  })
+    ids.push(item.id);
+  });
 
   let res = userStore.cart.filter((item) => {
-    return ids.indexOf(item.id) != -1
-  })
+    return ids.indexOf(item.id) != -1;
+  });
 
   res.forEach((item) => {
-    userStore.checkout.push(toRaw(item))
-  })
+    userStore.checkout.push(toRaw(item));
+  });
 
-  return navigateTo('/checkout')
-}
+  return navigateTo("/checkout");
+};
 
 onMounted(() => {
   setTimeout(() => {
-    userStore.isLoading = false
-  }, 300)
-})
+    userStore.isLoading = false;
+  }, 300);
+});
 </script>

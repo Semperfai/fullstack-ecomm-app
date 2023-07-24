@@ -1,7 +1,8 @@
 <template>
   <div id="AuthPage" class="w-full h-[100vh] bg-white">
     <div
-      class="w-full flex items-center justify-center p-5 border-b border-b-gray">
+      class="w-full flex items-center justify-center p-5 border-b border-b-gray"
+    >
       <NuxtLink to="/" class="min-w-[170px]">
         <img src="/logo.png" alt="logo" width="170" />
       </NuxtLink>
@@ -11,7 +12,8 @@
 
       <button
         @click="login('google')"
-        class="flex items-center justify-center gap-3 p-1.5 w-full border hover:bg-gray-100 rounded-full text-lg font-semibold">
+        class="flex items-center justify-center gap-3 p-1.5 w-full border hover:bg-gray-100 rounded-full text-lg font-semibold"
+      >
         <img class="max-w-[30px]" src="/google-logo.png" alt="google-log" />
       </button>
     </div>

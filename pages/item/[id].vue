@@ -2,17 +2,20 @@
   <MainLayout>
     <BaseContainer
       id="ShoppingCartPage"
-      class="mt-4 max-w-[1200px] mx-auto px-2">
+      class="mt-4 max-w-[1200px] mx-auto px-2"
+    >
       <div class="md:flex gap-4 justify-between mx-auto w-full">
         <div class="md:w-[40%]">
           <img
             v-if="currentImage"
             class="rounded-lg object-fit"
             :src="currentImage"
-            alt="Product img" />
+            alt="Product img"
+          />
           <div
             v-if="mockImages[0] !== ''"
-            class="flex items-center justify-center mt-2">
+            class="flex items-center justify-center mt-2"
+          >
             <div v-for="image in mockImages">
               <img
                 :src="image"
@@ -20,7 +23,8 @@
                 class="rounded-md object-fit border-[3px] cursor-pointer"
                 :class="currentImage === image ? 'border-[#FF5353]' : ''"
                 @click="currentImage = image"
-                @mouseover="currentImage = image" />
+                @mouseover="currentImage = image"
+              />
             </div>
           </div>
         </div>
@@ -34,7 +38,8 @@
               <Icon
                 name="material-symbols:star-rounded"
                 class="-mt-[17px]"
-                size="12"></Icon>
+                size="12"
+              ></Icon>
             </span>
             <p class="text-[#FF5353]">Extra 5%</p>
           </div>
@@ -55,7 +60,8 @@
           <div class="flex items-center justify-start gap-2 my-2">
             <div class="text-xl font-bold">$ {{ price }}</div>
             <span
-              class="bg-[#F5F5F5] border text-[#C08562] text-[9px] font-semibold px-1 rounded-sm">
+              class="bg-[#F5F5F5] border text-[#C08562] text-[9px] font-semibold px-1 rounded-sm"
+            >
               70$ off
             </span>
           </div>
@@ -69,7 +75,8 @@
           <button
             @click="addToCart()"
             :disabled="isInCart"
-            class="px-6 py-2 rounded-lg text-white text-lg font-semibold bg-gradient-to-r from-[#FF5353] to-[#FF8A00]">
+            class="px-6 py-2 rounded-lg text-white text-lg font-semibold bg-gradient-to-r from-[#FF5353] to-[#FF8A00]"
+          >
             <div v-if="isInCart">Is Added</div>
             <div v-else>Add to cart</div>
           </button>
@@ -80,39 +87,39 @@
 </template>
 
 <script setup lang="ts">
-import MainLayout from '@/layouts/MainLayout.vue'
-import { useUserStore } from '@/stores/user'
-import { images } from '@/__mocks__/images'
+import MainLayout from "@/layouts/MainLayout.vue";
+import { useUserStore } from "@/stores/user";
+import { images } from "@/__mocks__/images";
 
-const userStore = useUserStore()
-const route = useRoute()
+const userStore = useUserStore();
+const route = useRoute();
 
-const mockImages = ref(images)
-const currentImage = ref<string>(null)
+const mockImages = ref(images);
+const currentImage = ref<string>(null);
 
 const isInCart = computed(() => {
-  let res = false
+  let res = false;
   userStore.cart.forEach((prod: { id: any }) => {
     if (route.params.id === prod.id) {
-      res = true
+      res = true;
     }
-  })
+  });
 
-  return res
-})
+  return res;
+});
 
 const price = computed(() => {
-  return 100.24
-})
+  return 100.24;
+});
 
 onMounted(() => {
   watchEffect(() => {
-    currentImage.value = 'https://picsum.photos/id/77/800/800'
-    mockImages.value[0] = 'https://picsum.photos/id/77/800/800'
-  })
-})
+    currentImage.value = "https://picsum.photos/id/77/800/800";
+    mockImages.value[0] = "https://picsum.photos/id/77/800/800";
+  });
+});
 
 const addToCart = () => {
-  alert('Added to cart')
-}
+  alert("Added to cart");
+};
 </script>

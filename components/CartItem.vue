@@ -4,14 +4,16 @@
       <div
         @mouseenter="isHover = true"
         @mouseleave="isHover = false"
-        class="flex items-center justify-start p-0.5 cursor-pointer">
+        class="flex items-center justify-start p-0.5 cursor-pointer"
+      >
         <div
           @click="isSelected = !isSelected"
           class="flex items-center justify-center h-[20px] w-[20px] rounded-full border mr-5 ml-2"
           :class="[
             isHover ? 'border-[#FD374F]' : 'border-gray-300',
-            isSelected ? 'bg-[#FD374F]' : ''
-          ]">
+            isSelected ? 'bg-[#FD374F]' : '',
+          ]"
+        >
           <div class="h-[8px] w-[8px] rounded-full bg-white" />
         </div>
       </div>
@@ -30,7 +32,8 @@
         </div>
         <button
           @click="removeFromCart()"
-          class="mx-3 sm:block hidden -mt-0.5 hover:text-red-500">
+          class="mx-3 sm:block hidden -mt-0.5 hover:text-red-500"
+        >
           <Icon name="material-symbols:delete-outline" size="20" />
         </button>
       </div>
@@ -48,7 +51,8 @@
       <div class="flex items-center justify-end">
         <button
           @click="removeFromCart()"
-          class="sm:hidden block -mt-0.5 hover:text-red-500">
+          class="sm:hidden block -mt-0.5 hover:text-red-500"
+        >
           <Icon name="material-symbols:delete-outline" size="20" />
         </button>
       </div>
@@ -57,40 +61,40 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from "@/stores/user";
 const props = defineProps({
   product: {
-    type: Object
+    type: Object,
   },
   selectedArray: {
-    type: Array
-  }
-})
+    type: Array,
+  },
+});
 
-const emit = defineEmits(['selectedRadio'])
+const emit = defineEmits(["selectedRadio"]);
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 
-const { product, selectedArray } = toRefs(props)
+const { product, selectedArray } = toRefs(props);
 
-const isHover = ref(false)
-const isSelected = ref(false)
+const isHover = ref(false);
+const isSelected = ref(false);
 
 const removeFromCart = () => {
   userStore.cart.forEach((item, index) => {
     if (item.id === product.value.id) {
-      userStore.cart.splice(index, 1)
+      userStore.cart.splice(index, 1);
     }
-  })
-}
+  });
+};
 
 watch(
   () => isSelected.value,
   (val) => {
-    emit('selectedRadio', {
+    emit("selectedRadio", {
       id: product.value.id,
-      val: val
-    })
-  }
-)
+      val: val,
+    });
+  },
+);
 </script>
