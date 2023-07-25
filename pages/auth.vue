@@ -13,9 +13,30 @@
         class="flex items-center justify-center gap-3 p-1.5 w-full border hover:bg-gray-100 rounded-full text-lg font-semibold"
       >
         <img class="max-w-[30px]" src="/google-logo.png" alt="google-log" />
+        <p>Google</p>
+      </button>
+
+      <button
+        @click="login('github')"
+        class="flex items-center justify-center mt-4 gap-3 p-1.5 w-full border hover:bg-gray-100 rounded-full text-lg font-semibold">
+        <img class="max-w-[30px]" src="/github-logo.png" alt="google-log" />
+        <p>Google</p>
       </button>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// const client = useSupabaseClient()
+// const user = useSupabaseUser()
+
+// watchEffect(() => {
+//   if (user.value) {
+//     navigateTo.push('/')
+//   }
+// })
+
+// const login = async (prov: string) => {
+//   const { data, error } = await client.auth.signInWithOAuth({ provider: prov })
+// }
+</script>
