@@ -18,7 +18,8 @@
 
       <button
         @click="login('github')"
-        class="flex items-center justify-center mt-4 gap-3 p-1.5 w-full border hover:bg-gray-100 rounded-full text-lg font-semibold">
+        class="flex items-center justify-center mt-4 gap-3 p-1.5 w-full border hover:bg-gray-100 rounded-full text-lg font-semibold"
+      >
         <img class="max-w-[30px]" src="/github-logo.png" alt="google-log" />
         <p>Google</p>
       </button>
