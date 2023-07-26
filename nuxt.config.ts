@@ -10,8 +10,8 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-    '@nuxtjs/tailwindcss'
-    // '@nuxtjs/supabase'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/supabase'
   ],
   runtimeConfig: {
     public: {
