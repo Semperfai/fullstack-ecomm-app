@@ -27,17 +27,17 @@
   </div>
 </template>
 
-<script setup lang="ts">
-// const client = useSupabaseClient()
-// const user = useSupabaseUser()
+<script setup>
+const client = useSupabaseClient()
+const user = useSupabaseUser()
 
-// watchEffect(() => {
-//   if (user.value) {
-//     navigateTo.push('/')
-//   }
-// })
+watchEffect(() => {
+  if (user.value) {
+    navigateTo.push('/')
+  }
+})
 
-// const login = async (prov: string) => {
-//   const { data, error } = await client.auth.signInWithOAuth({ provider: prov })
-// }
+const login = async (prov) => {
+  const { data, error } = await client.auth.signInWithOAuth({ provider: prov })
+}
 </script>

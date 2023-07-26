@@ -106,7 +106,7 @@ const isInCart = computed(() => {
 
 const priceComputed = computed(() => {
   if (product.value && product.value.data) {
-    return product.value.data.price / 100
+    return (product.value.data.price / 100).toFixed(2)
   }
   return '0.00'
 })
