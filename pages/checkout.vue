@@ -6,7 +6,7 @@
           <div class="bg-white rounded-lg p-4">
             <div class="text-xl font semibold mb-2">Shipping Adress</div>
 
-            <div v-if="false">
+            <div v-if="currentAddress && currentAddress.data">
               <NuxtLink
                 to="/adress"
                 class="flex items-center pb-2 text-blue-500 hover:text-red-400"
@@ -20,31 +20,31 @@
                   <li class="flex items-center gap-2">
                     <div>Contact name:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.name || 'Test' }}
+                      {{ currentAddress?.data?.name }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Address:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.address || 'Test' }}
+                      {{ currentAddress?.data?.address }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Zip Code:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.zipcode || 'Test' }}
+                      {{ currentAddress?.data?.zipcode }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>City:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.city || 'Test' }}
+                      {{ currentAddress?.data?.city }}
                     </div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Country:</div>
                     <div class="font-bold">
-                      {{ currentAddress?.data?.country || 'Test' }}
+                      {{ currentAddress?.data?.country }}
                     </div>
                   </li>
                 </ul>
@@ -61,7 +61,7 @@
             </NuxtLink>
           </div>
           <div id="Items" class="bg-white rounded-lg p-4 mt-4">
-            <div v-for="product in mockProducts">
+            <div v-for="product in userStore.checkout">
               <CheckoutItem :product="product" />
             </div>
           </div>
@@ -107,11 +107,12 @@
   </MainLayout>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import MainLayout from '@/layouts/MainLayout.vue'
 import { useUserStore } from '@/stores/user'
 import { products } from '@/__mocks__/products'
 
+const user = useSupabaseClient()
 const userStore = useUserStore()
 const router = useRouter()
 
@@ -140,6 +141,27 @@ watch(
     }
   }
 )
+
+onBeforeMount(async () => {
+  if (userStore.checkout.length < 0) {
+    return navigateTo('/shoppingcart')
+  }
+
+  total.value = 0.0
+
+  if (user.value) {
+    currentAddress.value = await useFetch(`/api/prisma/get-address-by-user/${user.value.id}`)
+    setTimeout(() => {
+      userStore.isLoading = false
+    }, 200)
+  }
+})
+
+watchEffect(() => {
+  if (!user.value && router.fullPath == '/checkout') {
+    navigateTo('/auth')
+  }
+})
 
 onMounted(() => {
   isProcessing.value = true

@@ -119,7 +119,14 @@ import { useUserStore } from '@/stores/user'
 import { ITopMenuItems } from './types'
 
 const userStore = useUserStore()
+const client = useSupabaseClient()
+const user = useSupabaseUser()
 
+const items = ref<string | null>(null)
+const searchByName = useDebounce(async () => {
+  isSearching.value = true
+  items.value = await useFetch(`/api/prisma/search-by-name/${searchItem.value}`)
+}, 100)
 const isAccountMenu = ref<boolean>(false)
 const isSearching = ref<boolean>(false)
 const searchItem = ref<string>('')
@@ -152,4 +159,17 @@ const topMenuItems = ref<ITopMenuItems[]>([
     icon_name: 'ic:sharp-install-mobile'
   }
 ])
+
+watch(
+  () => searchItem.value,
+  () => {
+    if (searchItem.value) {
+      setTimeout(() => {
+        items.value = ''
+        isSearching.value = false
+        return
+      }, 500)
+    }
+  }
+)
 </script>
