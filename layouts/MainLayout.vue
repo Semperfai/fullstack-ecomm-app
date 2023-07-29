@@ -173,4 +173,7 @@ watch(
     searchByName()
   }
 )
+onMounted(() => {
+  isSearching.value = true
+})
 </script>
