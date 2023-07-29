@@ -174,6 +174,6 @@ watch(
   }
 )
 onMounted(() => {
-  isSearching.value = true
+  isSearching.value = false
 })
 </script>
