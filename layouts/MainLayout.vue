@@ -71,7 +71,7 @@
                     <img class="rounded-md" width="40" :src="item.url" />
                     <div class="truncate ml-2">{{ item.title }}</div>
                   </div>
-                  <div class="truncate">${{ item.price / 100 }}</div>
+                  <div class="truncate text-red-500 font-medium">${{ item.price / 100 }}</div>
                 </NuxtLink>
               </div>
             </div>
@@ -126,7 +126,7 @@ const searchByName = useDebounce(async () => {
   isSearching.value = true
   items.value = await useFetch(`/api/prisma/search-by-name/${searchItem.value}`)
   isSearching.value = false
-}, 200)
+}, 100)
 const isAccountMenu = ref<boolean>(false)
 const isSearching = ref<boolean>(false)
 const searchItem = ref<string>('')
