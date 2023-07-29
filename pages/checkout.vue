@@ -112,6 +112,8 @@ const userStore = useUserStore()
 const user = useSupabaseUser()
 const route = useRoute()
 
+definePageMeta({ middleware: 'auth' })
+
 let stripe = null
 let elements = null
 let card = null
