@@ -1,7 +1,7 @@
 <template>
   <div
     :id="`ProductComponent${product.id}`"
-    class="bg-white inline-block rounded hover:shadow-[0_0_13px_3px_rgba(0,0,0,0,15)] cursor-pointer"
+    class="bg-white inline-block rounded hover:shadow-[0_0_10px_3px_rgba(0,0,0,0.15)] cursor-pointer"
   >
     <NuxtLink :to="`/item/${product.id}`">
       <img :src="product.url" alt="product img" class="rounded-t" />

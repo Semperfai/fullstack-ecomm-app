@@ -4,16 +4,16 @@ const prisma = new PrismaClient()
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
-  const order = await prisma.orders.create({
+  const res = await prisma.addresses.create({
     data: {
       userId: body.userId,
       name: body.name,
-      adress: body.address,
-      zipcode: body.zipcode,
+      address: body.address,
+      zipcode: body.zipCode,
       city: body.city,
       country: body.country
     }
   })
 
-  return order
+  return res
 })

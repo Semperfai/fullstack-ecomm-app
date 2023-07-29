@@ -1,16 +1,17 @@
 <template>
   <MainLayout>
-    <div id="AdressPage" class="mt-4 max-w-[500px] mx-auto px-2">
+    <div id="AddressPage" class="mt-4 max-w-[500px] mx-auto px-2">
       <div class="mx-auto bg-white rounded-lg p-3">
-        <div class="text-xl text-bold mb-2">Adress Details</div>
+        <div class="text-xl text-bold mb-2">Address Details</div>
         <form @submit.prevent="submit()">
           <TextInput
             class="w-full"
+            placeholder="Contact Name"
             v-model:input="contactName"
-            placeholder="Enter your name"
             inputType="text"
-            :error="error && error.type === 'contactName' ? error.message : ''"
+            :error="error && error.type == 'contactName' ? error.message : ''"
           />
+
           <TextInput
             class="w-full mt-2"
             placeholder="Address"
@@ -58,9 +59,8 @@
 </template>
 
 <script setup>
-import MainLayout from '@/layouts/MainLayout.vue'
-import { useUserStore } from '@/stores/user'
-
+import MainLayout from '~/layouts/MainLayout.vue'
+import { useUserStore } from '~/stores/user'
 const userStore = useUserStore()
 const user = useSupabaseUser()
 
@@ -69,23 +69,24 @@ let address = ref(null)
 let zipCode = ref(null)
 let city = ref(null)
 let country = ref(null)
+
 let currentAddress = ref(null)
 let isUpdate = ref(false)
 let isWorking = ref(false)
 let error = ref(null)
 
 watchEffect(async () => {
-  currentAddress.value = await useFetch(`/api/prisma/get-address-by-user-id/${user.value.id}`)
-
+  currentAddress.value = await useFetch(`/api/prisma/get-address-by-user/${user.value.id}`)
   if (currentAddress.value.data) {
-    contactName.value = currentAddress.value.data.contactName
+    contactName.value = currentAddress.value.data.name
     address.value = currentAddress.value.data.address
-    zipCode.value = currentAddress.value.data.zipCode
+    zipCode.value = currentAddress.value.data.zipcode
     city.value = currentAddress.value.data.city
     country.value = currentAddress.value.data.country
 
     isUpdate.value = true
   }
+
   userStore.isLoading = false
 })
 
@@ -124,6 +125,7 @@ const submit = async () => {
     isWorking.value = false
     return
   }
+
   if (isUpdate.value) {
     await useFetch(`/api/prisma/update-address/${currentAddress.value.data.id}`, {
       method: 'PATCH',
@@ -138,10 +140,11 @@ const submit = async () => {
     })
 
     isWorking.value = false
+
     return navigateTo('/checkout')
   }
 
-  await useFetch('/api/prisma/add-address', {
+  await useFetch(`/api/prisma/add-address/`, {
     method: 'POST',
     body: {
       userId: user.value.id,
@@ -152,7 +155,9 @@ const submit = async () => {
       country: country.value
     }
   })
+
   isWorking.value = false
+
   return navigateTo('/checkout')
 }
 </script>

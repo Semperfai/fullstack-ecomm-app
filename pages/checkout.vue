@@ -1,51 +1,42 @@
 <template>
   <MainLayout>
-    <div class="mt-4 max-w-[1200px] mx-auto px-2" id="CheckoutPage">
+    <div id="CheckoutPage" class="mt-4 max-w-[1200px] mx-auto px-2">
       <div class="md:flex gap-4 justify-between mx-auto w-full">
         <div class="md:w-[65%]">
           <div class="bg-white rounded-lg p-4">
-            <div class="text-xl font semibold mb-2">Shipping Adress</div>
+            <div class="text-xl font-semibold mb-2">Shipping Address</div>
 
             <div v-if="currentAddress && currentAddress.data">
               <NuxtLink
-                to="/adress"
+                to="/address"
                 class="flex items-center pb-2 text-blue-500 hover:text-red-400"
               >
-                <Icon class="mr-2" name="mdi:plus" size="18" />
-                Update Adress
+                <Icon name="mdi:plus" size="18" class="mr-2" />
+                Update Address
               </NuxtLink>
+
               <div class="pt-2 border-t">
                 <div class="underline pb-1">Delivery Address</div>
                 <ul class="text-xs">
                   <li class="flex items-center gap-2">
                     <div>Contact name:</div>
-                    <div class="font-bold">
-                      {{ currentAddress?.data?.name }}
-                    </div>
+                    <div class="font-bold">{{ currentAddress.data.name }}</div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Address:</div>
-                    <div class="font-bold">
-                      {{ currentAddress?.data?.address }}
-                    </div>
+                    <div class="font-bold">{{ currentAddress.data.address }}</div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Zip Code:</div>
-                    <div class="font-bold">
-                      {{ currentAddress?.data?.zipcode }}
-                    </div>
+                    <div class="font-bold">{{ currentAddress.data.zipcode }}</div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>City:</div>
-                    <div class="font-bold">
-                      {{ currentAddress?.data?.city }}
-                    </div>
+                    <div class="font-bold">{{ currentAddress.data.city }}</div>
                   </li>
                   <li class="flex items-center gap-2">
                     <div>Country:</div>
-                    <div class="font-bold">
-                      {{ currentAddress?.data?.country }}
-                    </div>
+                    <div class="font-bold">{{ currentAddress.data.country }}</div>
                   </li>
                 </ul>
               </div>
@@ -53,39 +44,45 @@
 
             <NuxtLink
               v-else
-              to="/adress"
+              to="/address"
               class="flex items-center text-blue-500 hover:text-red-400"
             >
               <Icon name="mdi:plus" size="18" class="mr-2" />
-              Add New Adress
+              Add New Address
             </NuxtLink>
           </div>
+
           <div id="Items" class="bg-white rounded-lg p-4 mt-4">
             <div v-for="product in userStore.checkout">
               <CheckoutItem :product="product" />
             </div>
           </div>
         </div>
-        <div class="md:hidden block my-4" />
 
+        <div class="md:hidden block my-4" />
         <div class="md:w-[35%]">
           <div id="PlaceOrder" class="bg-white rounded-lg p-4">
-            <p class="text-2xl font-extrabold mb-2">Summary</p>
+            <div class="text-2xl font-extrabold mb-2">Summary</div>
+
             <div class="flex items-center justify-between my-4">
-              <p>Total Shipping</p>
-              <p>Free</p>
+              <div class="">Total Shipping</div>
+              <div class="">Free</div>
             </div>
+
             <div class="border-t" />
+
             <div class="flex items-center justify-between my-4">
-              <p class="font-semibold">Total</p>
-              <p class="text-2xl font-semibold">
+              <div class="font-semibold">Total</div>
+              <div class="text-2xl font-semibold">
                 $ <span class="font-extrabold">{{ total / 100 }}</span>
-              </p>
+              </div>
             </div>
 
             <form @submit.prevent="pay()">
-              <div class="border border-gray-500 p-2 rounded-sm" id="card-elemnt" />
-              <p id="card-error" role="alert" class="text-red-600 text-center font-semibold" />
+              <div class="border border-gray-500 p-2 rounded-sm" id="card-element" />
+
+              <p id="card-error" role="alert" class="text-red-700 text-center font-semibold" />
+
               <button
                 :disabled="isProcessing"
                 type="submit"
@@ -97,22 +94,22 @@
               </button>
             </form>
           </div>
+
           <div class="bg-white rounded-lg p-4 mt-4">
-            <div class="text-lg font-semibold mb-2 mt-2">Shop App</div>
-            <p class="my-2">Shop App keeps your information and payment safe</p>
+            <div class="text-lg font-semibold mb-2 mt-2">AliExpress</div>
+            <p class="my-2">AliExpress keeps your information and payment safe</p>
           </div>
         </div>
       </div>
     </div>
   </MainLayout>
 </template>
-
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue'
 import { useUserStore } from '@/stores/user'
 import { products } from '@/__mocks__/products'
 
-const user = useSupabaseClient()
+const user = useSupabaseUser()
 const userStore = useUserStore()
 const router = useRouter()
 
@@ -143,17 +140,14 @@ watch(
 )
 
 onBeforeMount(async () => {
-  if (userStore.checkout.length < 0) {
+  if (userStore.checkout.length < 1) {
     return navigateTo('/shoppingcart')
   }
 
   total.value = 0.0
-
   if (user.value) {
     currentAddress.value = await useFetch(`/api/prisma/get-address-by-user/${user.value.id}`)
-    setTimeout(() => {
-      userStore.isLoading = false
-    }, 200)
+    setTimeout(() => (userStore.isLoading = false), 200)
   }
 })
 

@@ -62,15 +62,16 @@
             <div>
               <div class="absolute bg-white max-w-[700px] h-auto w-full">
                 <NuxtLink
-                  v-if="false"
-                  :to="`/item/1`"
+                  v-if="items && items.data"
+                  v-for="item in items.data"
+                  :to="`/item/${item.id}`"
                   class="flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
                 >
                   <div class="flex items-center">
-                    <img class="rounded-md" width="40" src="https://picsum.photos/id/82/300/300" />
-                    <div class="truncate ml-2">TEST</div>
+                    <img class="rounded-md" width="40" :src="item.url" />
+                    <div class="truncate ml-2">{{ item.title }}</div>
                   </div>
-                  <div class="truncate">$ 100.99</div>
+                  <div class="truncate">${{ item.price / 100 }}</div>
                 </NuxtLink>
               </div>
             </div>
@@ -85,7 +86,7 @@
             <span
               class="absolute flex items-center justify-center -right-[3px] top-0 bg-[#FF4646] h-[17px] text-xs text-white px-0.5 rounded-full"
             >
-              0
+              {{ userStore.cart.length }}
             </span>
             <div class="min-w-[40px]">
               <Icon
@@ -119,14 +120,13 @@ import { useUserStore } from '@/stores/user'
 import { ITopMenuItems } from './types'
 
 const userStore = useUserStore()
-const client = useSupabaseClient()
-const user = useSupabaseUser()
 
-const items = ref<string | null>(null)
+const items = ref(null)
 const searchByName = useDebounce(async () => {
   isSearching.value = true
   items.value = await useFetch(`/api/prisma/search-by-name/${searchItem.value}`)
-}, 100)
+  isSearching.value = false
+}, 200)
 const isAccountMenu = ref<boolean>(false)
 const isSearching = ref<boolean>(false)
 const searchItem = ref<string>('')
@@ -163,13 +163,14 @@ const topMenuItems = ref<ITopMenuItems[]>([
 watch(
   () => searchItem.value,
   () => {
-    if (searchItem.value) {
+    if (!searchItem.value) {
       setTimeout(() => {
         items.value = ''
         isSearching.value = false
         return
       }, 500)
     }
+    searchByName()
   }
 )
 </script>
