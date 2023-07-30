@@ -25,8 +25,10 @@ Now run the command to migrate your database tables and run your seed file.
     
 ```
 npx prisma migrate dev --name init
-```
+
 
 # Application Images
 
-
+<img width="1439" src="https://res.cloudinary.com/dnenvhtxp/image/upload/v1690732027/screenshots/Screenshot_rtypv8.png">
+<img width="1439" src="https://res.cloudinary.com/dnenvhtxp/image/upload/v1690732023/screenshots/Screenshot_1_t7bqzp.png">
+<img width="1439" src="https://res.cloudinary.com/dnenvhtxp/image/upload/v1690732327/screenshots/Screenshot_3_ourxvq.png">
