@@ -40,7 +40,7 @@ import { useUserStore } from '@/stores/user'
 import { ExecuteMethodType, IMenuOverlayItems } from '@/components/types'
 const userStore = useUserStore()
 
-// const client = useSupabaseClient()
+const client = useSupabaseClient()
 const user = false
 
 const goTo = (url: string | undefined) => {
