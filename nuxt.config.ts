@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     strict: true,
     shim: false
   },
+  devtools: true,
   modules: [
     'nuxt-icon',
     'nuxt-lodash',
