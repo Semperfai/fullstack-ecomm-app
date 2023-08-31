@@ -6,7 +6,6 @@
       <NuxtLink to="/" class="min-w-[170px]">
         <NuxtImg
           quality="80"
-          format="webp"
           width="160"
           src="/logo.png"
           class="w-24 sm:w-28 md:w-28 lg:w-40"
