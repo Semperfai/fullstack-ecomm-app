@@ -4,7 +4,7 @@
     class="bg-white inline-block rounded hover:shadow-[0_0_10px_3px_rgba(0,0,0,0.15)] cursor-pointer"
   >
     <NuxtLink :to="`/item/${product.id}`">
-      <NuxtImg quality="80" :src="product.url" alt="product img" class="rounded-t" />
+      <NuxtImg format="webp" quality="80" :src="product.url" alt="product img" class="rounded-t" />
       <div id="ProductDetails">
         <span class="flex items-center justify-between gap-3 px-1 pt-1">
           <span class="text-[#FF6674] font-semibold">${{ price }}</span>

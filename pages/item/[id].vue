@@ -4,6 +4,7 @@
       <div class="md:flex gap-4 justify-between mx-auto w-full">
         <div class="md:w-[40%]">
           <NuxtImg
+            format="webp"
             quality="80"
             v-if="currentImage"
             class="rounded-lg object-fit"
