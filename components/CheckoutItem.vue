@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-start my-2">
-    <img class="rounded-md md:w-[150px] w-[90px]" :src="product.url" />
+    <NuxtImg quality="80" class="rounded-md md:w-[150px] w-[90px]" :src="product.url" />
 
     <div class="overflow-hidden pl-2">
       <div class="flex items-center">

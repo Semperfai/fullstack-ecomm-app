@@ -21,6 +21,7 @@
     "prettier-plugin-tailwindcss": "^0.4.1"
   },
   "dependencies": {
+    "@nuxt/image": "^1.0.0-rc.1",
     "@nuxtjs/supabase": "^0.3.8",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",

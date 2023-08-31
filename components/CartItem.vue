@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <img class="rounded-md md:w-[150px] w-[90px]" :src="product.url" />
+    <NuxtImg quality="80" class="rounded-md md:w-[150px] w-[90px]" :src="product.url" />
 
     <div class="overflow-hidden pl-2 w-full">
       <div class="flex items-center justify-between w-full">

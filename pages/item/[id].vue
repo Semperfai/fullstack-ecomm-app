@@ -3,10 +3,16 @@
     <div id="ItemPage" class="mt-4 max-w-[1200px] mx-auto px-2">
       <div class="md:flex gap-4 justify-between mx-auto w-full">
         <div class="md:w-[40%]">
-          <img v-if="currentImage" class="rounded-lg object-fit" :src="currentImage" />
+          <NuxtImg
+            quality="80"
+            v-if="currentImage"
+            class="rounded-lg object-fit"
+            :src="currentImage"
+          />
           <div v-if="mockImages[0] !== ''" class="flex items-center justify-center mt-2">
             <div v-for="image in mockImages">
-              <img
+              <NuxtImg
+                quality="80"
                 @mouseover="currentImage = image"
                 @click="currentImage = image"
                 width="70"
