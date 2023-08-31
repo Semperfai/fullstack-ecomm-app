@@ -1,63 +1,34 @@
-# Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## App Setup (localhost)
 
-## Setup
+git clone https://github.com/Semperfai/fullstack-ecomm-app.git
 
-Make sure to install the dependencies:
+cp .env.example .env
 
-```bash
-# npm
-npm install
+npm i
 
-# pnpm
-pnpm install
+npx prisma generate
 
-# yarn
-yarn install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
 ```
 
-## Production
+You'll have to setup a Supabase account & Stripe account, then add all of the details in to your .env file.
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
+Once you've connected your application to Supabase. You'll also need to setup the Auth Providers:
+    Google [Google](https://cloud.google.com)
+    Github [Github](https://github.com/settings/developers)
+    
+    https://supabase.com/docs/guides/auth/social-login/auth-google
+    https://supabase.com/docs/guides/auth/social-login/auth-github
+    
+Now run the command to migrate your database tables and run your seed file.
+    
 ```
+npx prisma migrate dev --name init
 
-Locally preview production build:
 
-```bash
-# npm
-npm run preview
+# Application Images
 
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+<img width="1439" src="https://res.cloudinary.com/dnenvhtxp/image/upload/v1690732027/screenshots/Screenshot_rtypv8.png">
+<img width="1439" src="https://res.cloudinary.com/dnenvhtxp/image/upload/v1690732023/screenshots/Screenshot_1_t7bqzp.png">
+<img width="1439" src="https://res.cloudinary.com/dnenvhtxp/image/upload/v1690732327/screenshots/Screenshot_3_ourxvq.png">
