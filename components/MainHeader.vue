@@ -4,7 +4,14 @@
       class="flex lg:justify-start justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto"
     >
       <NuxtLink to="/" class="min-w-[170px]">
-        <img width="160" src="/logo.png" class="w-24 sm:w-28 md:w-28 lg:w-40" alt="Shop App" />
+        <NuxtImg
+          quality="80"
+          format="webp"
+          width="160"
+          src="/logo.png"
+          class="w-24 sm:w-28 md:w-28 lg:w-40"
+          alt="Shop App"
+        />
       </NuxtLink>
       <div class="max-w-[700px] w-full md:block hidden">
         <div class="relative">
